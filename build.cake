@@ -25,7 +25,7 @@ var PackageTests = new PackageTest[] {
             Assemblies = new ExpectedAssemblyResult[] { new ExpectedAssemblyResult("mock-assembly.dll") }
         }
     },
-    new PackageTest(1, "Net60PackageTest")
+    new PackageTest(1, "Net6PackageTest")
     {
         Description = "Run mock-assembly.dll targeting .NET 6.0",
         Arguments = "testdata/net6.0/mock-assembly.dll",
@@ -35,7 +35,7 @@ var PackageTests = new PackageTest[] {
             Assemblies = new ExpectedAssemblyResult[] { new ExpectedAssemblyResult("mock-assembly.dll") }
         }
     },
-    new PackageTest(1, "Net70PackageTest")
+    new PackageTest(1, "Net7PackageTest")
     {
         Description = "Run mock-assembly.dll targeting .NET 7.0",
         Arguments = "testdata/net7.0/mock-assembly.dll",
@@ -45,7 +45,7 @@ var PackageTests = new PackageTest[] {
             Assemblies = new ExpectedAssemblyResult[] { new ExpectedAssemblyResult("mock-assembly.dll") }
         }
     },
-    new PackageTest(1, "Net80PackageTest")
+    new PackageTest(1, "Net8PackageTest")
     {
         Description = "Run mock-assembly.dll targeting .NET 8.0",
         Arguments = "testdata/net8.0/mock-assembly.dll",
@@ -55,10 +55,20 @@ var PackageTests = new PackageTest[] {
             Assemblies = new ExpectedAssemblyResult[] { new ExpectedAssemblyResult("mock-assembly.dll") }
         }
     },
-    new PackageTest(1, "Net90PackageTest")
+    new PackageTest(1, "Net9PackageTest")
     {
         Description = "Run mock-assembly.dll targeting .NET 9.0",
         Arguments = "testdata/net9.0/mock-assembly.dll",
+        ExpectedResult = new ExpectedResult("Failed")
+        {
+            Total = 35, Passed = 21, Failed = 5, Warnings = 1, Inconclusive = 1, Skipped = 7,
+            Assemblies = new ExpectedAssemblyResult[] { new ExpectedAssemblyResult("mock-assembly.dll") }
+        }
+    },
+    new PackageTest(1, "Net10PackageTest")
+    {
+        Description = "Run mock-assembly.dll targeting .NET 10.0",
+        Arguments = "testdata/net10.0/mock-assembly.dll",
         ExpectedResult = new ExpectedResult("Failed")
         {
             Total = 35, Passed = 21, Failed = 5, Warnings = 1, Inconclusive = 1, Skipped = 7,

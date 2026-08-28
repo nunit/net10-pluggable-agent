@@ -143,7 +143,7 @@ namespace NUnit.Engine.Agents
             Assert.That(startInfo.WorkingDirectory, Is.EqualTo(Environment.CurrentDirectory));
 
             var arguments = startInfo.Arguments;
-            Assert.That(arguments, Does.Not.Contain("--trace="));
+            Assert.That(arguments, Does.Contain("--trace="));
             Assert.That(arguments, Does.Not.Contain("--debug-agent"));
             Assert.That(arguments, Does.Not.Contain("--work="));
         }
@@ -158,14 +158,19 @@ namespace NUnit.Engine.Agents
             Assert.That(agentProcess.StartInfo.Arguments, Does.Contain("--debug-agent"));
         }
 
-        [Test]
-        public void TraceLevelSetting()
+        [TestCase("Off")]
+        [TestCase("Error")]
+        [TestCase("Warning")]
+        [TestCase("Info")]
+        [TestCase("Debug")]
+        [TestCase("Verbose")]
+        public void TraceLevelSetting(string traceLevel)
         {
             var runtime = SUPPORTED[0];
             _package.AddSetting(SettingDefinitions.TargetFrameworkName.WithValue(runtime));
-            _package.AddSetting(SettingDefinitions.InternalTraceLevel.WithValue("Debug"));
+            _package.AddSetting(SettingDefinitions.InternalTraceLevel.WithValue(traceLevel));
             var agentProcess = _launcher.CreateAgent(AGENTID, AGENCY_URL, _package);
-            Assert.That(agentProcess.StartInfo.Arguments, Does.Contain("--trace=Debug"));
+            Assert.That(agentProcess.StartInfo.Arguments, Does.Contain($"--trace={traceLevel}"));
         }
 
         [Test]
