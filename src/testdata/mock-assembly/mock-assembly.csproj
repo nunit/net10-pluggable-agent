@@ -15,12 +15,12 @@
     <Description>Assembly used in testing the engine</Description>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="NUnit" Version="$(NUnitFrameworkVersion)" />
-    <PackageReference Include="NUnitLite" Version="$(NUnitLiteVersion)" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="NUnit" />
+		<PackageReference Include="NUnitLite" />
+	</ItemGroup>
 
-  <ItemGroup>
+	<ItemGroup>
     <None Include="..\..\nunit.snk" Link="nunit.snk" />
   </ItemGroup>
   

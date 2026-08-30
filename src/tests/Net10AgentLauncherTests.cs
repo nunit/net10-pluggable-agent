@@ -101,7 +101,8 @@ namespace NUnit.Engine.Agents
             }
             else
             {
-                Assert.That(() => _launcher.CreateAgent(AGENTID, AGENCY_URL, _package), Throws.ArgumentException);
+                var action = () => _launcher.CreateAgent(AGENTID, AGENCY_URL, _package);
+                Assert.That(action, Throws.ArgumentException);
             }
         }
 
@@ -127,7 +128,8 @@ namespace NUnit.Engine.Agents
             }
             else
             {
-                Assert.That(() => _launcher.CreateAgent(AGENTID, AGENCY_URL, _package), Throws.ArgumentException);
+                var action = () => _launcher.CreateAgent(AGENTID, AGENCY_URL, _package);
+                Assert.That(action, Throws.ArgumentException);
             }
         }
 
@@ -209,7 +211,8 @@ namespace NUnit.Engine.Agents
             };
 
             Console.WriteLine("Launching agent for direct execution");
-            Assert.That(() => agentProcess.Start(), Throws.Nothing);
+            var action = () => agentProcess.Start();
+            Assert.That(action, Throws.Nothing);
             agentProcess.BeginOutputReadLine();
             Assert.That(agentProcess.WaitForExit(5000), "Agent failed to terminate");
             Assert.That(agentProcess.ExitCode, Is.EqualTo(0));

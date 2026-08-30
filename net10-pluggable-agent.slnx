@@ -1,9 +1,12 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="src/Directory.Build.props" />
+  </Folder>
   <Folder Name="/SolutionItems/">
     <File Path=".gitignore" />
     <File Path="build.cake" />
+    <File Path="Directory.Packages.props" />
     <File Path="GitReleaseManager.yaml" />
-    <File Path="GitVersion.yml" />
     <File Path="LICENSE.txt" />
     <File Path="NuGet.config" />
     <File Path="nunit_256.png" />

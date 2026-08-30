@@ -17,9 +17,6 @@
 	
 	<PropertyGroup>
 		<!-- Common Package Versions -->
-        <NUnitAgentCoreVersion>4.0.0-beta.5.6</NUnitAgentCoreVersion>
-		<NUnitEngineApiVersion>4.0.0-beta.8.7</NUnitEngineApiVersion>
-		<NUnitExtensibilityVersion>4.0.0-beta.4.5</NUnitExtensibilityVersion>
 		<NUnitFrameworkVersion Condition="'$(NUnitFrameworkVersion)'==''">4.3.2</NUnitFrameworkVersion>
 		<NUnitLiteVersion Condition="'$(NUnitLiteVersion)'==''">4.3.2</NUnitLiteVersion>
 	</PropertyGroup>
