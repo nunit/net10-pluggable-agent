@@ -68,7 +68,7 @@ var PackageTests = new PackageTest[] {
     new PackageTest(1, "Net10PackageTest")
     {
         Description = "Run mock-assembly.dll targeting .NET 10.0",
-        Arguments = "testdata/net10.0/mock-assembly.dll",
+        Arguments = "testdata/net10.0/mock-assembly.dll --trace:Off",
         ExpectedResult = new ExpectedResult("Failed")
         {
             Total = 35, Passed = 21, Failed = 5, Warnings = 1, Inconclusive = 1, Skipped = 7,
@@ -143,12 +143,14 @@ BuildSettings.Packages.Add(new NuGetPackage(
     checks: new PackageCheck[]
     {
         HasFiles("LICENSE.txt", "README.md", "nunit_256.png"),
-        HasDirectory("tools").WithFiles(
-            "nunit-agent-launcher-net10.dll", "nunit.engine.api.dll"),
         HasDirectory("tools/agent").WithFiles(
             "nunit-agent-net10.dll", "nunit.engine.api.dll", "nunit.common.dll", 
             "nunit.extensibility.api.dll", "nunit.extensibility.dll", "nunit.agent.core.dll",
-            "TestCentric.Metadata.dll", "Microsoft.Extensions.DependencyModel.dll")
+            "TestCentric.Metadata.dll", "Microsoft.Extensions.DependencyModel.dll"),
+        HasDirectory("tools/net462").WithFiles(
+            "nunit-agent-launcher-net10.dll", "nunit.engine.api.dll"),
+        HasDirectory("tools/net8.0").WithFiles(
+            "nunit-agent-launcher-net10.dll", "nunit.engine.api.dll")
     },
     testRunner: new AgentRunner(BuildSettings.NuGetTestDirectory + "NUnit.Extension.Net10PluggableAgent." + BuildSettings.PackageVersion + "/tools/agent/nunit-agent-net10.dll"),
     tests: PackageTests
@@ -160,12 +162,15 @@ BuildSettings.Packages.Add(new ChocolateyPackage(
     checks: new PackageCheck[]
     {
         HasDirectory("tools").WithFiles(
-            "LICENSE.txt", "README.md", "nunit_256.png", "VERIFICATION.txt",
-            "nunit-agent-launcher-net10.dll", "nunit.engine.api.dll"),
+            "LICENSE.txt", "README.md", "nunit_256.png", "VERIFICATION.txt"),
         HasDirectory("tools/agent").WithFiles(
             "nunit-agent-net10.dll", "nunit.engine.api.dll", "nunit.common.dll",
             "nunit.extensibility.api.dll", "nunit.extensibility.dll", "nunit.agent.core.dll",
-            "TestCentric.Metadata.dll", "Microsoft.Extensions.DependencyModel.dll")
+            "TestCentric.Metadata.dll", "Microsoft.Extensions.DependencyModel.dll"),
+        HasDirectory("tools/net462").WithFiles(
+            "nunit-agent-launcher-net10.dll", "nunit.engine.api.dll"),
+        HasDirectory("tools/net8.0").WithFiles(
+            "nunit-agent-launcher-net10.dll", "nunit.engine.api.dll")
     },
     testRunner: new AgentRunner(BuildSettings.ChocolateyTestDirectory + "nunit-extension-net10-pluggable-agent." + BuildSettings.PackageVersion + "/tools/agent/nunit-agent-net10.dll"),
     tests: PackageTests));

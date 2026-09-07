@@ -1,8 +1,5 @@
 <Solution>
   <Folder Name="/Solution Items/">
-    <File Path="src/Directory.Build.props" />
-  </Folder>
-  <Folder Name="/SolutionItems/">
     <File Path=".gitignore" />
     <File Path="build.cake" />
     <File Path="Directory.Packages.props" />
@@ -11,16 +8,17 @@
     <File Path="NuGet.config" />
     <File Path="nunit_256.png" />
     <File Path="README.md" />
+    <File Path="src/Directory.Build.props" />
   </Folder>
-  <Folder Name="/SolutionItems/.github/" />
-  <Folder Name="/SolutionItems/.github/workflows/">
+  <Folder Name="/Solution Items/.github/" />
+  <Folder Name="/Solution Items/.github/workflows/">
     <File Path=".github/workflows/Net10PluggableAgent.yml" />
   </Folder>
-  <Folder Name="/SolutionItems/choco/">
+  <Folder Name="/Solution Items/choco/">
     <File Path="choco/net10-pluggable-agent.nuspec" />
     <File Path="choco/VERIFICATION.txt" />
   </Folder>
-  <Folder Name="/SolutionItems/nuget/">
+  <Folder Name="/Solution Items/nuget/">
     <File Path="nuget/Net10PluggableAgent.nuspec" />
   </Folder>
   <Project Path="src/agent/nunit-agent-net10.csproj" />
