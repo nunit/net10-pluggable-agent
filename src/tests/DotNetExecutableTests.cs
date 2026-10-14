@@ -60,7 +60,7 @@ namespace NUnit.Engine.Agents
         {
             File.WriteAllText(Path.Combine(_directory, runAsX86 ? "x86" : "native", Platform.IsWindows ? "dotnet" : "dotnet.exe"), string.Empty);
 
-            Assert.That(() => _getExecutable.Invoke(null, new object[] { runAsX86 }),
+            Assert.That((Action)(() => _getExecutable.Invoke(null, new object[] { runAsX86 })),
                 Throws.TypeOf<TargetInvocationException>().With.InnerException.TypeOf<Exception>());
         }
 
@@ -69,7 +69,7 @@ namespace NUnit.Engine.Agents
         {
             string name = Platform.IsWindows ? "dotnet.exe" : "dotnet";
 
-            Assert.That(() => _getExecutable.Invoke(null, new object[] { false }),
+            Assert.That((Action)(() => _getExecutable.Invoke(null, new object[] { false })),
                 Throws.TypeOf<TargetInvocationException>().With.InnerException.Message.EqualTo($"Unable to locate {name}."));
         }
     }
