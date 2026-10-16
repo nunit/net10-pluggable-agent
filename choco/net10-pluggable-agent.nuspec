@@ -9,7 +9,7 @@
     <owners>Charlie Poole</owners>
     <copyright>Copyright (c) 2021-2026 Charlie Poole</copyright>
     <projectUrl>http://nunit.org</projectUrl>
-	<licenseUrl>https://raw.githubusercontent.com/nunit/net90-pluggable-agent/master/LICENSE.txt</licenseUrl>
+	<licenseUrl>https://raw.githubusercontent.com/nunit/net10-pluggable-agent/master/LICENSE.txt</licenseUrl>
 	<requireLicenseAcceptance>false</requireLicenseAcceptance>
 	<iconUrl>https://cdn.rawgit.com/nunit/resources/master/images/icon/nunit_256.png</iconUrl>
 	<language>en-US</language>
