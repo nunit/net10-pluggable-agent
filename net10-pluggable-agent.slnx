@@ -19,6 +19,7 @@
     <File Path="choco/VERIFICATION.txt" />
   </Folder>
   <Folder Name="/Solution Items/nuget/">
+    <File Path="nuget/Net10InProcessAgent.nuspec" />
     <File Path="nuget/Net10PluggableAgent.nuspec" />
   </Folder>
   <Project Path="src/agent/nunit-agent-net10.csproj" />
