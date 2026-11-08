@@ -8,8 +8,8 @@ namespace NUnit.Engine.Agents
 {
     [Extension(
         Description = "Agent for running tests in-process on .NET 10",
-        Path ="/NUnit/Engine/AgentLaunchers")]
-    [ExtensionProperty("AgentType", "LocalProcess")]
+        Path ="/NUnit/Engine/InProcessAgents")]
+    [ExtensionProperty("AgentType", "InProcess")]
     [ExtensionProperty("TargetFramework", ".NETCoreApp,Version=v10.0")]
     public class Net10InProcessTestAgent : InProcessTestAgent
     {
