@@ -4,7 +4,6 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Text;
 using NUnit.Common;
@@ -57,7 +56,7 @@ namespace NUnit.Engine.Agents
             bool runAsX86 = settings.GetValueOrDefault(SettingDefinitions.RunAsX86);
             bool debugTests = settings.GetValueOrDefault(SettingDefinitions.DebugTests);
             bool debugAgent = settings.GetValueOrDefault(SettingDefinitions.DebugAgent);
-            string traceLevel = settings.GetValueOrDefault(SettingDefinitions.InternalTraceLevel);
+            string traceLevel = settings.GetValueOrDefault(SettingDefinitions.InternalTraceLevel) ?? "Warning";
             bool loadUserProfile = settings.GetValueOrDefault(SettingDefinitions.LoadUserProfile);
             string workDirectory = settings.GetValueOrDefault(SettingDefinitions.WorkDirectory);
 

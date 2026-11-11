@@ -10,15 +10,4 @@
         <AnalysisMode>Minimum</AnalysisMode>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp3.1'">
-		<NUnitFrameworkVersion>3.14.0</NUnitFrameworkVersion>
-		<NUnitLiteVersion>3.14.0</NUnitLiteVersion>
-	</PropertyGroup>
-	
-	<PropertyGroup>
-		<!-- Common Package Versions -->
-		<NUnitFrameworkVersion Condition="'$(NUnitFrameworkVersion)'==''">4.3.2</NUnitFrameworkVersion>
-		<NUnitLiteVersion Condition="'$(NUnitLiteVersion)'==''">4.3.2</NUnitLiteVersion>
-	</PropertyGroup>
-
 </Project>
