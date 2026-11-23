@@ -10,14 +10,19 @@ using NUnit.Framework;
 
 namespace NUnit.Engine.Agents
 {
+    /// <summary>
+    /// Checks executable selection without relying on installed runtimes or
+    /// sharing the launcher's cached installation paths between test cases.
+    /// </summary>
     [NonParallelizable]
     public class DotNetExecutableTests
     {
         private string _directory = null!;
         private string? _originalRoot;
         private string? _originalX86Root;
-        private MethodInfo _getExecutable = null!;
+        private Func<bool, string> _getExecutable = null!;
 
+        /// <summary>Creates isolated installation roots and a fresh helper assembly.</summary>
         [SetUp]
         public void SetUp()
         {
@@ -25,17 +30,25 @@ namespace NUnit.Engine.Agents
             Directory.CreateDirectory(_directory);
             _originalRoot = Environment.GetEnvironmentVariable("DOTNET_ROOT");
             _originalX86Root = Environment.GetEnvironmentVariable("DOTNET_ROOT_X86");
-            Directory.CreateDirectory(Path.Combine(_directory, "native"));
-            Directory.CreateDirectory(Path.Combine(_directory, "x86"));
-            Environment.SetEnvironmentVariable("DOTNET_ROOT", Path.Combine(_directory, "native"));
-            Environment.SetEnvironmentVariable("DOTNET_ROOT_X86", Path.Combine(_directory, "x86"));
+            string nativeDirectory = Path.Combine(_directory, "native");
+            string x86Directory = Path.Combine(_directory, "x86");
+            Directory.CreateDirectory(nativeDirectory);
+            Directory.CreateDirectory(x86Directory);
+            Environment.SetEnvironmentVariable("DOTNET_ROOT", nativeDirectory);
+            Environment.SetEnvironmentVariable("DOTNET_ROOT_X86", x86Directory);
 
             // Isolate the helper's cached install directories from other launcher tests.
             var assembly = Assembly.Load(File.ReadAllBytes(typeof(DotNet).Assembly.Location));
-            _getExecutable = assembly.GetType(typeof(DotNet).FullName!)!
-                .GetMethod(nameof(DotNet.GetDotNetExe))!;
+            var methodInfo = assembly.GetType(typeof(DotNet).FullName!)!
+                .GetMethod(nameof(DotNet.GetDotNetExe), BindingFlags.Public | BindingFlags.Static)!;
+#if NETFRAMEWORK
+            _getExecutable = (Func<bool, string>)methodInfo.CreateDelegate(typeof(Func<bool, string>));
+#else
+            _getExecutable = methodInfo.CreateDelegate<Func<bool, string>>();
+#endif
         }
 
+        /// <summary>Restores the original environment and removes the temporary roots.</summary>
         [TearDown]
         public void TearDown()
         {
@@ -44,6 +57,8 @@ namespace NUnit.Engine.Agents
             Directory.Delete(_directory, true);
         }
 
+        /// <summary>Finds the native executable in the requested installation root.</summary>
+        /// <param name="runAsX86">Whether to select the x86 installation root.</param>
         [TestCase(false)]
         [TestCase(true)]
         public void FindsPlatformExecutable(bool runAsX86)
@@ -51,26 +66,29 @@ namespace NUnit.Engine.Agents
             string expected = Path.Combine(_directory, runAsX86 ? "x86" : "native", Platform.IsWindows ? "dotnet.exe" : "dotnet");
             File.WriteAllText(expected, string.Empty);
 
-            Assert.That(_getExecutable.Invoke(null, new object[] { runAsX86 }), Is.EqualTo(expected));
+            Assert.That(_getExecutable(runAsX86), Is.EqualTo(expected));
         }
 
+        /// <summary>Rejects an executable whose filename belongs to the other platform.</summary>
+        /// <param name="runAsX86">Whether to select the x86 installation root.</param>
         [TestCase(false)]
         [TestCase(true)]
         public void RejectsExecutableForOtherPlatform(bool runAsX86)
         {
             File.WriteAllText(Path.Combine(_directory, runAsX86 ? "x86" : "native", Platform.IsWindows ? "dotnet" : "dotnet.exe"), string.Empty);
 
-            Assert.That((Action)(() => _getExecutable.Invoke(null, new object[] { runAsX86 })),
-                Throws.TypeOf<TargetInvocationException>().With.InnerException.TypeOf<Exception>());
+            Assert.That((Action)(() => _getExecutable(runAsX86)),
+                Throws.TypeOf<FileNotFoundException>());
         }
 
+        /// <summary>Reports the executable name used on the current platform.</summary>
         [Test]
         public void MissingExecutableDiagnosticNamesPlatformExecutable()
         {
             string name = Platform.IsWindows ? "dotnet.exe" : "dotnet";
 
-            Assert.That((Action)(() => _getExecutable.Invoke(null, new object[] { false })),
-                Throws.TypeOf<TargetInvocationException>().With.InnerException.Message.EqualTo($"Unable to locate {name}."));
+            Assert.That((Action)(() => _getExecutable(false)),
+                Throws.TypeOf<FileNotFoundException>().With.Message.EqualTo($"Unable to locate {name}."));
         }
     }
 }

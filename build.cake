@@ -15,30 +15,10 @@ BuildSettings.Initialize
 );
 
 var PackageTests = new PackageTest[] {
-    new PackageTest(1, "Net60PackageTest")
+    new PackageTest(1, "Net10PackageTest")
     {
-        Description = "Run mock-assembly.dll targeting .NET 6.0",
-        Arguments = "testdata/net6.0/mock-assembly.dll",
-        ExpectedResult = new ExpectedResult("Failed")
-        {
-            Total = 35, Passed = 21, Failed = 5, Warnings = 1, Inconclusive = 1, Skipped = 7,
-            Assemblies = new ExpectedAssemblyResult[] { new ExpectedAssemblyResult("mock-assembly.dll") }
-        }
-    },
-    new PackageTest(1, "Net70PackageTest")
-    {
-        Description = "Run mock-assembly.dll targeting .NET 7.0",
-        Arguments = "testdata/net7.0/mock-assembly.dll",
-        ExpectedResult = new ExpectedResult("Failed")
-        {
-            Total = 35, Passed = 21, Failed = 5, Warnings = 1, Inconclusive = 1, Skipped = 7,
-            Assemblies = new ExpectedAssemblyResult[] { new ExpectedAssemblyResult("mock-assembly.dll") }
-        }
-    },
-    new PackageTest(1, "Net80PackageTest")
-    {
-        Description = "Run mock-assembly.dll targeting .NET 8.0",
-        Arguments = "testdata/net8.0/mock-assembly.dll",
+        Description = "Run mock-assembly.dll targeting .NET 10.0",
+        Arguments = "testdata/net10.0/mock-assembly.dll",
         ExpectedResult = new ExpectedResult("Failed")
         {
             Total = 35, Passed = 21, Failed = 5, Warnings = 1, Inconclusive = 1, Skipped = 7,
@@ -55,37 +35,47 @@ var PackageTests = new PackageTest[] {
             Assemblies = new ExpectedAssemblyResult[] { new ExpectedAssemblyResult("mock-assembly.dll") }
         }
     },
-    new PackageTest(1, "Net10.0PackageTest")
+    new PackageTest(1, "Net80PackageTest")
     {
-        Description = "Run mock-assembly.dll targeting .NET 10.0",
-        Arguments = "testdata/net10.0/mock-assembly.dll --trace:Off",
+        Description = "Run mock-assembly.dll targeting .NET 8.0",
+        Arguments = "testdata/net8.0/mock-assembly.dll",
         ExpectedResult = new ExpectedResult("Failed")
         {
             Total = 35, Passed = 21, Failed = 5, Warnings = 1, Inconclusive = 1, Skipped = 7,
             Assemblies = new ExpectedAssemblyResult[] { new ExpectedAssemblyResult("mock-assembly.dll") }
         }
     },
-    new PackageTest(1, "AspNetCore6.0Test")
+    new PackageTest(1, "Net70PackageTest")
     {
-        Description = "Run test using AspNetCore targeting .NET 6.0",
-        Arguments = "testdata/net6.0/aspnetcore-test.dll",
+        Description = "Run mock-assembly.dll targeting .NET 7.0",
+        Arguments = "testdata/net7.0/mock-assembly.dll",
+        ExpectedResult = new ExpectedResult("Failed")
+        {
+            Total = 35, Passed = 21, Failed = 5, Warnings = 1, Inconclusive = 1, Skipped = 7,
+            Assemblies = new ExpectedAssemblyResult[] { new ExpectedAssemblyResult("mock-assembly.dll") }
+        }
+    },
+    new PackageTest(1, "Net60PackageTest")
+    {
+        Description = "Run mock-assembly.dll targeting .NET 6.0",
+        Arguments = "testdata/net6.0/mock-assembly.dll",
+        ExpectedResult = new ExpectedResult("Failed")
+        {
+            Total = 35, Passed = 21, Failed = 5, Warnings = 1, Inconclusive = 1, Skipped = 7,
+            Assemblies = new ExpectedAssemblyResult[] { new ExpectedAssemblyResult("mock-assembly.dll") }
+        }
+    },
+    new PackageTest(1, "AspNetCore10Test")
+    {
+        Description = "Run test using AspNetCore targeting .NET 10.0",
+        Arguments = "testdata/net10.0/aspnetcore-test.dll",
         ExpectedResult = new ExpectedResult("Passed")
         {
             Total = 2, Passed = 2, Failed = 0, Warnings = 0, Inconclusive = 0, Skipped = 0,
             Assemblies = new ExpectedAssemblyResult[] { new ExpectedAssemblyResult("aspnetcore-test.dll") }
         }
     },
-    new PackageTest(1, "AspNetCore8.0Test")
-    {
-        Description = "Run test using AspNetCore targeting .NET 8.0",
-        Arguments = "testdata/net8.0/aspnetcore-test.dll",
-        ExpectedResult = new ExpectedResult("Passed")
-        {
-            Total = 2, Passed = 2, Failed = 0, Warnings = 0, Inconclusive = 0, Skipped = 0,
-            Assemblies = new ExpectedAssemblyResult[] { new ExpectedAssemblyResult("aspnetcore-test.dll") }
-        }
-    },
-    new PackageTest(1, "AspNetCore9.0Test")
+    new PackageTest(1, "AspNetCore90Test")
     {
         Description = "Run test using AspNetCore targeting .NET 9.0",
         Arguments = "testdata/net9.0/aspnetcore-test.dll",
@@ -95,17 +85,47 @@ var PackageTests = new PackageTest[] {
             Assemblies = new ExpectedAssemblyResult[] { new ExpectedAssemblyResult("aspnetcore-test.dll") }
         }
     },
-    new PackageTest(1, "Net6.0WindowsFormsTest")
+    new PackageTest(1, "AspNetCore80Test")
     {
-        Description = "Run test using windows forms under .NET 6.0",
-        Arguments = "testdata/net6.0-windows/windows-test.dll",
+        Description = "Run test using AspNetCore targeting .NET 8.0",
+        Arguments = "testdata/net8.0/aspnetcore-test.dll",
+        ExpectedResult = new ExpectedResult("Passed")
+        {
+            Total = 2, Passed = 2, Failed = 0, Warnings = 0, Inconclusive = 0, Skipped = 0,
+            Assemblies = new ExpectedAssemblyResult[] { new ExpectedAssemblyResult("aspnetcore-test.dll") }
+        }
+    },
+    new PackageTest(1, "AspNetCore60Test")
+    {
+        Description = "Run test using AspNetCore targeting .NET 6.0",
+        Arguments = "testdata/net6.0/aspnetcore-test.dll",
+        ExpectedResult = new ExpectedResult("Passed")
+        {
+            Total = 2, Passed = 2, Failed = 0, Warnings = 0, Inconclusive = 0, Skipped = 0,
+            Assemblies = new ExpectedAssemblyResult[] { new ExpectedAssemblyResult("aspnetcore-test.dll") }
+        }
+    },
+    new PackageTest(1, "Net10WindowsFormsTest")
+    {
+        Description = "Run test using windows forms under .NET 10.0",
+        Arguments = "testdata/net10.0-windows/windows-test.dll",
         ExpectedResult = new ExpectedResult("Passed")
         {
             Total = 2, Passed = 2, Failed = 0, Warnings = 0, Inconclusive = 0, Skipped = 0,
             Assemblies = new ExpectedAssemblyResult[] { new ExpectedAssemblyResult("windows-test.dll") }
         }
     },
-    new PackageTest(1, "Net8.0WindowsFormsTest")
+    new PackageTest(1, "Net90WindowsFormsTest")
+    {
+        Description = "Run test using windows forms under .NET 9.0",
+        Arguments = "testdata/net9.0-windows/windows-test.dll",
+        ExpectedResult = new ExpectedResult("Passed")
+        {
+            Total = 2, Passed = 2, Failed = 0, Warnings = 0, Inconclusive = 0, Skipped = 0,
+            Assemblies = new ExpectedAssemblyResult[] { new ExpectedAssemblyResult("windows-test.dll") }
+        }
+    },
+    new PackageTest(1, "Net80WindowsFormsTest")
     {
         Description = "Run test using windows forms under .NET 8.0",
         Arguments = "testdata/net8.0-windows/windows-test.dll",
@@ -115,10 +135,10 @@ var PackageTests = new PackageTest[] {
             Assemblies = new ExpectedAssemblyResult[] { new ExpectedAssemblyResult("windows-test.dll") }
         }
     },
-    new PackageTest(1, "Net9.0WindowsFormsTest")
+    new PackageTest(1, "Net60WindowsFormsTest")
     {
-        Description = "Run test using windows forms under .NET 9.0",
-        Arguments = "testdata/net9.0-windows/windows-test.dll",
+        Description = "Run test using windows forms under .NET 6.0",
+        Arguments = "testdata/net6.0-windows/windows-test.dll",
         ExpectedResult = new ExpectedResult("Passed")
         {
             Total = 2, Passed = 2, Failed = 0, Warnings = 0, Inconclusive = 0, Skipped = 0,
@@ -134,7 +154,7 @@ BuildSettings.Packages.Add(new NuGetPackage(
     {
         HasFiles("LICENSE.txt", "README.md", "nunit_256.png"),
         HasDirectory("tools/agent").WithFiles(
-            "nunit-agent-net10.dll", "nunit.engine.api.dll", "nunit.common.dll", 
+            "nunit-agent-net10.dll", "nunit.engine.api.dll", "nunit.common.dll",
             "nunit.extensibility.api.dll", "nunit.extensibility.dll", "nunit.agent.core.dll",
             "TestCentric.Metadata.dll", "Microsoft.Extensions.DependencyModel.dll"),
         HasDirectory("tools/net462").WithFiles(
@@ -142,24 +162,10 @@ BuildSettings.Packages.Add(new NuGetPackage(
         HasDirectory("tools/net10.0").WithFiles(
             "nunit-agent-launcher-net10.dll", "nunit.engine.api.dll")
     },
-    testRunner: new NUnitConsoleRunner("NUnit.ConsoleRunner", "4.0.0-beta.5"),
+    testRunner: new AgentRunner(
+        BuildSettings.NuGetTestDirectory + "NUnit.Extension.Net10PluggableAgent." + BuildSettings.PackageVersion + "/tools/agent/nunit-agent-net10.dll"),
     tests: PackageTests
     ));
-
-/*BuildSettings.Packages.Add(new NuGetPackage(
-    id: "NUnit.Extension.Net10InProcessAgent",
-    source: BuildSettings.NuGetDirectory + "Net10InProcessAgent.nuspec",
-    checks: new PackageCheck[]
-    {
-        HasFiles("LICENSE.txt", "README.md", "nunit_256.png"),
-        HasDirectory("tools").WithFiles(
-            "nunit-agent-net10.dll", "nunit.engine.api.dll", "nunit.common.dll", 
-            "nunit.extensibility.api.dll", "nunit.extensibility.dll", "nunit.agent.core.dll",
-            "TestCentric.Metadata.dll", "Microsoft.Extensions.DependencyModel.dll")
-    }
-    //testRunner: new AgentRunner(BuildSettings.NuGetTestDirectory + "NUnit.Extension.Net10InProcessAgent." + BuildSettings.PackageVersion + "/tools/agent/nunit-agent-net10.dll"),
-    //tests: PackageTests
-    ));*/
 
 BuildSettings.Packages.Add(new ChocolateyPackage(
     "nunit-extension-net10-pluggable-agent",
@@ -177,8 +183,8 @@ BuildSettings.Packages.Add(new ChocolateyPackage(
         HasDirectory("tools/net10.0").WithFiles(
             "nunit-agent-launcher-net10.dll", "nunit.engine.api.dll")
     },
-    // Switch to use of console runner once we start building the chocolatey package again
-    testRunner: new AgentRunner(BuildSettings.ChocolateyTestDirectory + "nunit-extension-net10-pluggable-agent." + BuildSettings.PackageVersion + "/tools/agent/nunit-agent-net10.dll"),
+    testRunner: new AgentRunner(
+        BuildSettings.ChocolateyTestDirectory + "nunit-extension-net10-pluggable-agent." + BuildSettings.PackageVersion + "/tools/agent/nunit-agent-net10.dll"),
     tests: PackageTests));
 
 //////////////////////////////////////////////////////////////////////
