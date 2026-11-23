@@ -12,16 +12,18 @@
 		<ProjectReference Include="..\launcher\nunit-agent-launcher-net10.csproj" />
 	</ItemGroup>
 
+	<!-- The agent itself targets net10.0 only; its in-process class is tested there. -->
+	<ItemGroup Condition="'$(TargetFramework)'=='net10.0'">
+		<ProjectReference Include="..\agent\nunit-agent-net10.csproj" />
+		<!-- The agent brings in nunit.common, which has its own NUnit.Common.DotNet. An alias keeps it
+		     out of the global namespace, so the tests see only the launcher's DotNet class. -->
+		<PackageReference Include="NUnit.Common" Aliases="common" />
+	</ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="NUnit" />
 		<PackageReference Include="NUnitLite" />
 		<PackageReference Include="NUnit.Engine.Api" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Update="app.config">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
 	</ItemGroup>
 
 </Project>
